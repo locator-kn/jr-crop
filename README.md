@@ -1,5 +1,43 @@
-jr-crop
+jr-crop - FORK
 ======
+
+This is a fork of JrSchild/jr-crop. Thank you very much for the great work! 
+I implemented the functionality to get only the crop information without cropping, because I want to crop my picture in backend.
+
+New params:
+
+* getOnlyData (boolean - default: false)
+
+returns a object like:
+
+```
+cropInfoObject = {
+    x: 124,
+    y: 223,
+    width: 509,
+    height: 367,
+    originWidth: 3200,
+    originHeight: 2800,
+    src: 'imageSource'
+}
+```
+
+* roundData (boolean - default: false)
+
+Rounds information (x, y, width, ...) from cropInfoObject to get integer values. 
+
+```
+$jrCrop.crop({
+    url: url,
+    width: 200,
+    height: 200,
+    getOnlyData: true,
+    roundData: true
+});
+```
+
+---------------------------------------------------------
+
 
 A simple ionic plugin to crop your images, inspired by whatsapp and telegram.
 * Specifiy width and height of target
