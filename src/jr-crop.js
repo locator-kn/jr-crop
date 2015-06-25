@@ -256,6 +256,7 @@ function($ionicModal, $rootScope, $q) {
           src: this.imgSelect.src
         };
 
+        this.options.modal.remove();
         // Return without cropping file
         return this.promise.resolve(cropInfo);
       }
