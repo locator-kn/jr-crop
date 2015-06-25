@@ -204,7 +204,7 @@ function($ionicModal, $rootScope, $q) {
     /**
      * Calculate the new image from the values calculated by
      * user input. Return a canvas-object with the image on it.
-     * 
+     *
      * Note: It doesn't actually downsize the image, it only returns
      * a cropped version. Since there's inconsistenties in image-quality
      * when downsizing it's up to the developer to implement this. Preferably
@@ -218,7 +218,7 @@ function($ionicModal, $rootScope, $q) {
       canvas.width = this.options.width / this.scale;
       canvas.height = this.options.height / this.scale;
 
-      // The full proportions 
+      // The full proportions
       var currWidth = this.imgWidth * this.scale;
       var currHeight = this.imgHeight * this.scale;
 
@@ -229,6 +229,37 @@ function($ionicModal, $rootScope, $q) {
 
       var sourceX = (this.posX - correctX) / this.scale;
       var sourceY = (this.posY - correctY) / this.scale;
+
+
+      if(this.options.getOnlyData){
+        var valueX = Math.abs(sourceX);
+        var valueY = Math.abs(sourceY);
+        var cropWidth = (this.options.width * this.imgWidth) / currWidth;
+        var cropHeight = (this.options.height * this.imgHeight) / currHeight;
+
+        if(this.options.roundData) {
+          valueX = Math.floor(valueX);
+          valueY = Math.floor(valueY);
+          cropWidth = Math.floor(cropWidth);
+          cropHeight = Math.floor(cropHeight);
+          this.imgWidth = Math.floor(this.imgWidth);
+          this.imgHeight = Math.floor(this.imgHeight);
+        }
+
+        var cropInfo = {
+          x: valueX,
+          y: valueY,
+          width: cropWidth,
+          height: cropHeight,
+          originWidth: this.imgWidth,
+          originHeight: this.imgHeight,
+          src: this.imgSelect.src
+        };
+
+        // Return without cropping file
+        return this.promise.resolve(cropInfo);
+      }
+
 
       context.drawImage(this.imgFull, sourceX, sourceY);
 
@@ -242,7 +273,7 @@ function($ionicModal, $rootScope, $q) {
      */
     loadImage: function() {
       var promise = $q.defer();
-      
+
       // Load the image and resolve with the DOM node when done.
       angular.element('<img />')
         .bind('load', function(e) {
@@ -262,7 +293,9 @@ function($ionicModal, $rootScope, $q) {
       height: 0,
       aspectRatio: 0,
       cancelText: 'Cancel',
-      chooseText: 'Choose'
+      chooseText: 'Choose',
+      getOnlyData: false,
+      roundData: false
     },
 
     crop: function(options) {
