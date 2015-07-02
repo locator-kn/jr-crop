@@ -1,5 +1,5 @@
 {
-  "name": "jr-crop",
+  "name": "jr-crop-locator",
   "version": "1.0.0",
   "scripts": {
     "test": "node examples/app.js"
