@@ -1,9 +1,10 @@
 {
-  "name": "jr-crop",
+  "name": "jr-crop-locator",
   "version": "1.0.0",
-  "homepage": "https://github.com/JrSchild/jr-crop",
+  "homepage": "https://github.com/locator-kn/jr-crop-locator",
   "authors": [
-    "Joram Ruitenschild"
+    "Joram Ruitenschild",
+    "Timotheus Rurpecht"
   ],
   "description": "A simple ionic plugin to crop your images.",
   "main": [
